@@ -1,8 +1,8 @@
-package com.example.sleeptracker.sleeptracker
+package com.vishalag53.sleeptracker.sleeptracker
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import com.example.sleeptracker.database.SleepDatabaseDao
+import com.vishalag53.sleeptracker.database.SleepDatabaseDao
 
 class SleepTrackerViewModel (
     val database: SleepDatabaseDao,

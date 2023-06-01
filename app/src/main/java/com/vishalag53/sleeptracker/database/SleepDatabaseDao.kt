@@ -1,4 +1,4 @@
-package com.example.sleeptracker.database
+package com.vishalag53.sleeptracker.database
 
 import androidx.lifecycle.LiveData
 import androidx.room.*

@@ -1,4 +1,4 @@
-package com.example.sleeptracker
+package com.vishalag53.sleeptracker
 
 import android.annotation.SuppressLint
 import android.content.res.Resources

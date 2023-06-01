@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.example.sleeptracker.sleeptracker.SleepTrackerFragment">
+        tools:context="com.example.sleeptracker.com.vishalag53.sleeptracker.sleeptracker.SleepTrackerFragment">
 
         <ScrollView
             android:layout_width="match_parent"

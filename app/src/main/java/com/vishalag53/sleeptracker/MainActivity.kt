@@ -1,4 +1,4 @@
-package com.example.sleeptracker
+package com.vishalag53.sleeptracker
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

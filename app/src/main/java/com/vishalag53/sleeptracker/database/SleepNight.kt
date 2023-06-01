@@ -1,4 +1,4 @@
-package com.example.sleeptracker.database
+package com.vishalag53.sleeptracker.database
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
