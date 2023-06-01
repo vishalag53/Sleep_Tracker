@@ -12,7 +12,7 @@ import java.text.SimpleDateFormat
  * Returns a string representing the numeric quality rating.
  */
 fun convertNumericQualityToString(quality: Int, resources: Resources): String {
-    var qualityString = resources.getString(R.string.three_ok)
+    var qualityString = resources.getString(R.string.three_ok)        // 3 -> qualityString
     when (quality) {
         -1 -> qualityString = "--"
         0 -> qualityString = resources.getString(R.string.zero_very_bad)

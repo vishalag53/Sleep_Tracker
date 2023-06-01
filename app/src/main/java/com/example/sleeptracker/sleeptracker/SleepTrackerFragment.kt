@@ -18,6 +18,7 @@ class SleepTrackerFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val binding = DataBindingUtil.inflate<FragmentSleepTrackerBinding>(inflater,R.layout.fragment_sleep_tracker,container,false)
+
         return binding.root
     }
 
