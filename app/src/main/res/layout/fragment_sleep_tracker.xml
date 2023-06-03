@@ -4,7 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="sleepTrackerViewModel"
+            type="com.vishalag53.sleeptracker.sleeptracker.SleepTrackerViewModel"
+            />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

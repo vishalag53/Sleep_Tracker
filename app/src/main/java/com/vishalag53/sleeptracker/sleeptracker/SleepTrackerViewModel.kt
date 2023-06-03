@@ -4,9 +4,9 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import com.vishalag53.sleeptracker.database.SleepDatabaseDao
 
-class SleepTrackerViewModel (
+class SleepTrackerViewModel(
     val database: SleepDatabaseDao,
     application: Application
-) : AndroidViewModel(application){
+) : AndroidViewModel(application) {
 
 }
