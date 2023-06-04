@@ -9,29 +9,33 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.vishalag53.sleeptracker.R
 import com.vishalag53.sleeptracker.database.SleepDatabase
+import com.vishalag53.sleeptracker.database.SleepDatabaseDao
 import com.vishalag53.sleeptracker.databinding.FragmentSleepTrackerBinding
 
 
 class SleepTrackerFragment : Fragment() {
 
+    lateinit var sleepTrackerViewModel: SleepTrackerViewModel
+
+    lateinit var viewModelFactory: SleepTrackerViewModelFactory
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         val binding = DataBindingUtil.inflate<FragmentSleepTrackerBinding>(inflater,R.layout.fragment_sleep_tracker,container,false)
 
         val application = requireNotNull(this.activity).application
 
-        val dataSource = SleepDatabase.getInstance(application).sleepDatabaseDao
+        val dataSource: SleepDatabaseDao = SleepDatabase.getInstance(application).sleepDatabaseDao
+        viewModelFactory = SleepTrackerViewModelFactory(dataSource,application)
 
-        val viewModelFactory = SleepTrackerViewModelFactory(dataSource,application)
+        sleepTrackerViewModel = ViewModelProvider(this,viewModelFactory)[SleepTrackerViewModel::class.java]
 
-        val sleepTrackerViewModel = ViewModelProvider(this,viewModelFactory)[SleepTrackerViewModel::class.java]
+        binding.lifecycleOwner = this
 
         binding.sleepTrackerViewModel = sleepTrackerViewModel
 
-        binding.lifecycleOwner = this
         return binding.root
     }
 
