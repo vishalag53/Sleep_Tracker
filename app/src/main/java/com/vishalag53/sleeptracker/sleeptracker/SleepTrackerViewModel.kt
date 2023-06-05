@@ -1,7 +1,9 @@
 package com.vishalag53.sleeptracker.sleeptracker
 
+import android.annotation.SuppressLint
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.viewModelScope
@@ -22,6 +24,17 @@ class SleepTrackerViewModel(
     val nightsString = Transformations.map(nights) { nights ->
         formatNights(nights, application.resources)
     }
+
+    private val _navigateToSleepQuality = MutableLiveData<SleepNight>()
+    val navigateToSleepQuality: LiveData<SleepNight>
+        get() = _navigateToSleepQuality
+
+    @SuppressLint("NullSafeMutableLiveData")
+    fun doneNavigating(){
+        _navigateToSleepQuality.value = null
+    }
+
+
 
     init {
         initializeTonight()
@@ -71,6 +84,7 @@ class SleepTrackerViewModel(
             oldNight.endTimeMilli = System.currentTimeMillis()
 
             update(oldNight)
+            _navigateToSleepQuality.value = oldNight
         }
     }
 

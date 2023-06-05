@@ -27,6 +27,8 @@ class SleepQualityFragment : Fragment() {
 
         val application = requireNotNull(this.activity).application
 
+
+
         return binding.root
     }
 
