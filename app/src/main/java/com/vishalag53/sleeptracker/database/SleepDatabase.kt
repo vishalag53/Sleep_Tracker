@@ -14,7 +14,7 @@ abstract class SleepDatabase : RoomDatabase() {
     companion object CreateDataBase {
 
         @Volatile
-        var INSTANCE: SleepDatabase? = null
+        private var INSTANCE: SleepDatabase? = null
 
         fun getInstance(context: Context): SleepDatabase {
             synchronized(this) {

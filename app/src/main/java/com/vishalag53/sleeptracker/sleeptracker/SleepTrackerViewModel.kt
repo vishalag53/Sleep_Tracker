@@ -17,7 +17,7 @@ class SleepTrackerViewModel(
     application: Application
 ) : AndroidViewModel(application) {
 
-    var tonight = MutableLiveData<SleepNight?>()
+    private var tonight = MutableLiveData<SleepNight?>()
 
     val nights = database.getAllNights()
 
@@ -55,7 +55,18 @@ class SleepTrackerViewModel(
         _navigateToSleepQuality.value = null
     }
 
+    private val _navigateToSleepDataQuality = MutableLiveData<Long>()
+    val navigateToSleepDataQuality
+        get() = _navigateToSleepDataQuality
 
+    fun onSleepNightClicked(id: Long) {
+        _navigateToSleepDataQuality.value = id
+    }
+
+    @SuppressLint("NullSafeMutableLiveData")
+    fun onSleepDataQualityNavigated() {
+        _navigateToSleepDataQuality.value = null
+    }
 
     init {
         initializeTonight()
@@ -76,15 +87,21 @@ class SleepTrackerViewModel(
     }
 
     private suspend fun clear() {
-        database.clear()
+        withContext(Dispatchers.IO) {
+            database.clear()
+        }
     }
 
     private suspend fun update(night: SleepNight) {
-        database.update(night)
+        withContext(Dispatchers.IO) {
+            database.update(night)
+        }
     }
 
     private suspend fun insert(night: SleepNight) {
-        database.insert(night)
+        withContext(Dispatchers.IO) {
+            database.insert(night)
+        }
     }
 
     fun onStartTracking() {
@@ -114,7 +131,7 @@ class SleepTrackerViewModel(
         viewModelScope.launch {
             clear()
             tonight.value = null
-            _showSnackBarEvent.value = true
         }
+        _showSnackBarEvent.value = true
     }
 }

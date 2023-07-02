@@ -3,6 +3,7 @@ package com.vishalag53.sleeptracker.sleepquality
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.vishalag53.sleeptracker.database.SleepDatabaseDao
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -15,7 +16,7 @@ class SleepQualityViewModel(
         val database: SleepDatabaseDao): ViewModel() {
 
     private val viewModelJob = Job()
-    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
+    //private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
     private val _navigateToSleepTracker = MutableLiveData<Boolean?>()
 
@@ -27,17 +28,11 @@ class SleepQualityViewModel(
     }
 
     fun onSetSleepQuality(quality: Int){
-        uiScope.launch {
-            withContext(Dispatchers.IO){
-                val tonight = database.get(sleepNightKey)?: return@withContext
+        viewModelScope.launch {
+                val tonight = database.get(sleepNightKey)?: return@launch
                 tonight.sleepQuality = quality
                 database.update(tonight)
-            }
             _navigateToSleepTracker.value = true
         }
-    }
-    override fun onCleared() {
-        super.onCleared()
-        viewModelJob.cancel()
     }
 }
