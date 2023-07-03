@@ -5,13 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.vishalag53.sleeptracker.R
-import com.vishalag53.sleeptracker.convertDurationToFormatted
-import com.vishalag53.sleeptracker.convertNumericQualityToString
 import com.vishalag53.sleeptracker.database.SleepNight
 import com.vishalag53.sleeptracker.databinding.ListItemSleepNightBinding
 
-class SleepNightAdapter: ListAdapter<SleepNight, SleepNightAdapter.ViewHolder>(SleepNightDiffCallback()){
+class SleepNightAdapter(val clickListener: SleepNightListener): ListAdapter<SleepNight, SleepNightAdapter.ViewHolder>(SleepNightDiffCallback()){
 
 
 
@@ -28,14 +25,15 @@ class SleepNightAdapter: ListAdapter<SleepNight, SleepNightAdapter.ViewHolder>(S
 //        else{
 //            holder.textView.setTextColor(Color.BLACK)
 //        }
-        holder.bind(item)
+        holder.bind(item!!,clickListener)
     }
 
 
     class ViewHolder private constructor(val binding: ListItemSleepNightBinding): RecyclerView.ViewHolder(binding.root){
 
-        fun bind(item: SleepNight) {
+        fun bind(item: SleepNight, clickListener: SleepNightListener) {
             binding.sleep = item
+            binding.clickListener = clickListener
             binding.executePendingBindings()
         }
 
@@ -58,4 +56,8 @@ class SleepNightDiffCallback: DiffUtil.ItemCallback<SleepNight>(){
         return oldItem == newItem
     }
 
+}
+
+class SleepNightListener(val clickListener: (sleepId: Long) -> Unit){
+    fun onClick(night: SleepNight) = clickListener(night.nightId)
 }
