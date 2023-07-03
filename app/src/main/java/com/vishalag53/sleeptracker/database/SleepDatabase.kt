@@ -11,7 +11,7 @@ abstract class SleepDatabase : RoomDatabase() {
 
     abstract val sleepDatabaseDao: SleepDatabaseDao
 
-    companion object CreateDataBase {
+    companion object{
 
         @Volatile
         private var INSTANCE: SleepDatabase? = null

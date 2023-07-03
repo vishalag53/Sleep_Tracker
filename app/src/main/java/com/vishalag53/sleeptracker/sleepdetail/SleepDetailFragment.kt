@@ -28,7 +28,7 @@ class SleepDetailFragment : Fragment() {
         val dataSource = SleepDatabase.getInstance(application).sleepDatabaseDao
         val viewModelFactory = SleepDetailViewModelFactory(arguments.sleepNightKey, dataSource)
 
-        val sleepDetailViewModel = ViewModelProvider(this,viewModelFactory).get(SleepDetailViewModel::class.java)
+        val sleepDetailViewModel = ViewModelProvider(this,viewModelFactory)[SleepDetailViewModel::class.java]
 
         binding.sleepDetailViewModel = sleepDetailViewModel
 

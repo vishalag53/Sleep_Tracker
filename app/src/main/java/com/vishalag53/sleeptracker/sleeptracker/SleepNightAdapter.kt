@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.vishalag53.sleeptracker.database.SleepNight
 import com.vishalag53.sleeptracker.databinding.ListItemSleepNightBinding
 
-class SleepNightAdapter(val clickListener: SleepNightListener): ListAdapter<SleepNight, SleepNightAdapter.ViewHolder>(SleepNightDiffCallback()){
-
+class SleepNightAdapter(val clickListener: SleepNightListener) :
+    ListAdapter<SleepNight, SleepNightAdapter.ViewHolder>(SleepNightDiffCallback()) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -25,11 +25,12 @@ class SleepNightAdapter(val clickListener: SleepNightListener): ListAdapter<Slee
 //        else{
 //            holder.textView.setTextColor(Color.BLACK)
 //        }
-        holder.bind(item!!,clickListener)
+        holder.bind(item, clickListener)
     }
 
 
-    class ViewHolder private constructor(val binding: ListItemSleepNightBinding): RecyclerView.ViewHolder(binding.root){
+    class ViewHolder private constructor(val binding: ListItemSleepNightBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: SleepNight, clickListener: SleepNightListener) {
             binding.sleep = item
@@ -40,14 +41,14 @@ class SleepNightAdapter(val clickListener: SleepNightListener): ListAdapter<Slee
         companion object {
             fun from(parent: ViewGroup): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
-                val binding = ListItemSleepNightBinding.inflate(layoutInflater,parent,false)
+                val binding = ListItemSleepNightBinding.inflate(layoutInflater, parent, false)
                 return ViewHolder(binding)
             }
         }
     }
 }
 
-class SleepNightDiffCallback: DiffUtil.ItemCallback<SleepNight>(){
+class SleepNightDiffCallback : DiffUtil.ItemCallback<SleepNight>() {
     override fun areItemsTheSame(oldItem: SleepNight, newItem: SleepNight): Boolean {
         return oldItem.nightId == newItem.nightId
     }
@@ -58,6 +59,6 @@ class SleepNightDiffCallback: DiffUtil.ItemCallback<SleepNight>(){
 
 }
 
-class SleepNightListener(val clickListener: (sleepId: Long) -> Unit){
+class SleepNightListener(val clickListener: (sleepId: Long) -> Unit) {
     fun onClick(night: SleepNight) = clickListener(night.nightId)
 }
