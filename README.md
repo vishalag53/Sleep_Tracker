@@ -1,8 +1,4 @@
 # Sleep_Tracker
-#learningFromUdacity
+#learnFromTheUdacity #DevelopingAndroidAppswithKotlin
 
-Lesson 6
-
-DataBase
-
-Simple android app made through udacity course with kotlin as programming language.
+    ✔️ Room Database
